@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Collector</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>AI-Powered Data Collector</h1>
+    <textarea id="input" rows="4" cols="50" placeholder="Enter random text here..."></textarea><br>
+    <button onclick="submitData()">Submit</button>
+    <pre id="response"></pre>
+
+    <script>
+    async function submitData() {
+        const text = document.getElementById('input').value;
+        const res = await fetch('/api/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text })
+        });
+        const data = await res.json();
+        document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+    }
+    </script>
+</body>
+</html>
